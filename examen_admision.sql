@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2019 a las 15:30:19
+-- Tiempo de generación: 12-06-2019 a las 14:24:41
 -- Versión del servidor: 10.1.40-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -53,9 +53,9 @@ CREATE TABLE `datos_personales` (
   `apellido_paterno` varchar(45) DEFAULT NULL,
   `apellido_materno` varchar(45) DEFAULT NULL,
   `telefono` int(11) DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
+  `celular` int(11) DEFAULT NULL,
   `dni` int(11) DEFAULT NULL,
-  `edad` int(11) DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
   `sexo` varchar(45) DEFAULT NULL,
   `correo` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -64,11 +64,11 @@ CREATE TABLE `datos_personales` (
 -- Volcado de datos para la tabla `datos_personales`
 --
 
-INSERT INTO `datos_personales` (`id_datos`, `id_ubicacion`, `nombre`, `apellido_paterno`, `apellido_materno`, `telefono`, `direccion`, `dni`, `edad`, `sexo`, `correo`) VALUES
-(1, 1, 'luis', 'palomino', 'alvarez', 981284459, '#459', 72650196, 22, 'm', 'lpalomino298@gmail.com'),
-(2, 1, 'jose', 'alberto', 'cabrera', 987654321, '#980', 7223124, 54, 'm', 'luisalvarez_15a@hotmail.com'),
-(3, 1, 'mari', 'angel', 'gabriel', 987654321, 'Av. sol 590', 45632132, 22, 'm', 'lsdasf@gmail.com'),
-(4, 1, 'Samuel', 'Fernandez', 'Rodriguez', 981284451, 'Av. Alcazar 486', 16546874, 28, 'm', 'samuel@gmail.com');
+INSERT INTO `datos_personales` (`id_datos`, `id_ubicacion`, `nombre`, `apellido_paterno`, `apellido_materno`, `telefono`, `celular`, `dni`, `fecha_nacimiento`, `sexo`, `correo`) VALUES
+(1, 1, 'luis', 'palomino', 'alvarez', NULL, 981284459, 72650196, '2000-06-26', 'm', 'lpalomino298@gmail.com'),
+(2, 1, 'jose', 'alberto', 'cabrera', NULL, 987654321, 7223124, '2001-10-18', 'm', 'luisalvarez_15a@hotmail.com'),
+(3, 1, 'mari', 'angel', 'gabriel', NULL, 987654321, 45632132, '1990-03-14', 'm', 'lsdasf@gmail.com'),
+(4, 1, 'Samuel', 'Fernandez', 'Rodriguez', NULL, 981284451, 16546874, '1993-04-24', 'm', 'samuel@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -128,7 +128,11 @@ CREATE TABLE `grupos` (
   `id_grupo` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `descripcion` varchar(500) DEFAULT NULL,
-  `fecha` date DEFAULT NULL
+  `auto_guardado` varchar(2) DEFAULT NULL,
+  `fecha_inicio` datetime DEFAULT NULL,
+  `fecha_fin` datetime DEFAULT NULL,
+  `id_ubi_examen` int(11) DEFAULT NULL,
+  `estado` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -145,23 +149,74 @@ CREATE TABLE `integrantes` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `lug_nacimiento`
+--
+
+CREATE TABLE `lug_nacimiento` (
+  `id_lug_nacimiento` int(11) NOT NULL,
+  `idDepa` int(11) DEFAULT NULL,
+  `idProv` int(11) DEFAULT NULL,
+  `idDist` int(11) DEFAULT NULL,
+  `direccion_nac` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lug_servicio`
+--
+
+CREATE TABLE `lug_servicio` (
+  `id_lugar_servicio` int(11) NOT NULL,
+  `idDepa` int(11) DEFAULT NULL,
+  `idProv` int(11) DEFAULT NULL,
+  `idDist` int(11) DEFAULT NULL,
+  `lugar_servicio` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `opciones_carrera`
+--
+
+CREATE TABLE `opciones_carrera` (
+  `id_opciones_carrera` int(11) NOT NULL,
+  `id_carrera` int(11) DEFAULT NULL,
+  `id_postulante` int(11) DEFAULT NULL,
+  `preferencia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `postulante`
 --
 
 CREATE TABLE `postulante` (
   `id_postulante` int(11) NOT NULL,
   `id_datos` int(11) DEFAULT NULL,
-  `id_carrera` int(11) DEFAULT NULL,
-  `becario` tinyint(4) NOT NULL DEFAULT '1'
+  `id_lug_nacimiento` int(11) DEFAULT NULL,
+  `id_sede_examen` int(11) DEFAULT NULL,
+  `becario` tinyint(4) NOT NULL DEFAULT '1',
+  `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_examen` date DEFAULT NULL,
+  `fecha_alta_smv` date DEFAULT NULL,
+  `fecha_baja_smv` date DEFAULT NULL,
+  `institucion_armada` varchar(20) DEFAULT NULL,
+  `id_lugar_servicio` int(11) DEFAULT NULL,
+  `id_situacion` int(11) DEFAULT NULL,
+  `medio_infomacion` varchar(50) DEFAULT NULL,
+  `turno_deseado` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `postulante`
 --
 
-INSERT INTO `postulante` (`id_postulante`, `id_datos`, `id_carrera`, `becario`) VALUES
-(1, 1, 1, 1),
-(2, 3, 1, 0);
+INSERT INTO `postulante` (`id_postulante`, `id_datos`, `id_lug_nacimiento`, `id_sede_examen`, `becario`, `fecha_registro`, `fecha_examen`, `fecha_alta_smv`, `fecha_baja_smv`, `institucion_armada`, `id_lugar_servicio`, `id_situacion`, `medio_infomacion`, `turno_deseado`) VALUES
+(1, 1, NULL, NULL, 1, '2019-06-20 14:26:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 3, NULL, NULL, 0, '2019-06-07 09:46:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -221,8 +276,23 @@ CREATE TABLE `resultado` (
   `id_examen` int(11) DEFAULT NULL,
   `id_postulante` int(11) DEFAULT NULL,
   `tiempo_resolucion` time DEFAULT NULL,
-  `fecha` datetime DEFAULT NULL,
-  `nota` int(11) DEFAULT NULL
+  `fecha_resolucion` datetime DEFAULT NULL,
+  `nota` int(11) DEFAULT NULL,
+  `estado` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sede_examen`
+--
+
+CREATE TABLE `sede_examen` (
+  `id_sede_examen` int(11) NOT NULL,
+  `idDepa` int(11) DEFAULT NULL,
+  `idProv` int(11) DEFAULT NULL,
+  `idDist` int(11) DEFAULT NULL,
+  `lugar_examen` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -234,6 +304,18 @@ CREATE TABLE `resultado` (
 CREATE TABLE `select_indiv_examen` (
   `id_examen` int(11) NOT NULL,
   `id_postulante` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `situacion_servicio`
+--
+
+CREATE TABLE `situacion_servicio` (
+  `id_situacion` int(11) NOT NULL,
+  `situacion` varchar(50) NOT NULL,
+  `fecha_baja` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2137,15 +2219,16 @@ CREATE TABLE `ubicacion` (
   `id_ubicacion` int(11) NOT NULL,
   `idDepa` int(11) DEFAULT NULL,
   `idProv` int(11) DEFAULT NULL,
-  `idDist` int(11) DEFAULT NULL
+  `idDist` int(11) DEFAULT NULL,
+  `dirrecion_actual` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `ubicacion`
 --
 
-INSERT INTO `ubicacion` (`id_ubicacion`, `idDepa`, `idProv`, `idDist`) VALUES
-(1, 15, 127, 1251);
+INSERT INTO `ubicacion` (`id_ubicacion`, `idDepa`, `idProv`, `idDist`, `dirrecion_actual`) VALUES
+(1, 15, 127, 1251, NULL);
 
 -- --------------------------------------------------------
 
@@ -2428,12 +2511,37 @@ ALTER TABLE `integrantes`
   ADD KEY `id_grupo` (`id_grupo`);
 
 --
+-- Indices de la tabla `lug_nacimiento`
+--
+ALTER TABLE `lug_nacimiento`
+  ADD PRIMARY KEY (`id_lug_nacimiento`),
+  ADD KEY `idDepa` (`idDepa`,`idProv`,`idDist`);
+
+--
+-- Indices de la tabla `lug_servicio`
+--
+ALTER TABLE `lug_servicio`
+  ADD PRIMARY KEY (`id_lugar_servicio`),
+  ADD KEY `idDepa` (`idDepa`,`idProv`,`idDist`);
+
+--
+-- Indices de la tabla `opciones_carrera`
+--
+ALTER TABLE `opciones_carrera`
+  ADD PRIMARY KEY (`id_opciones_carrera`),
+  ADD KEY `id_carrera` (`id_carrera`,`id_postulante`),
+  ADD KEY `id_postulante` (`id_postulante`);
+
+--
 -- Indices de la tabla `postulante`
 --
 ALTER TABLE `postulante`
   ADD PRIMARY KEY (`id_postulante`),
-  ADD KEY `id_datos` (`id_datos`,`id_carrera`),
-  ADD KEY `id_carrera` (`id_carrera`);
+  ADD KEY `id_datos` (`id_datos`),
+  ADD KEY `id_lug_nacimiento` (`id_lug_nacimiento`),
+  ADD KEY `id_sede_inscripcion` (`id_sede_examen`),
+  ADD KEY `id_lugar_servicio` (`id_lugar_servicio`,`id_situacion`),
+  ADD KEY `id_situacion` (`id_situacion`);
 
 --
 -- Indices de la tabla `preguntas`
@@ -2465,11 +2573,24 @@ ALTER TABLE `resultado`
   ADD KEY `id_postulante` (`id_postulante`);
 
 --
+-- Indices de la tabla `sede_examen`
+--
+ALTER TABLE `sede_examen`
+  ADD PRIMARY KEY (`id_sede_examen`),
+  ADD KEY `idDepa` (`idDepa`,`idProv`,`idDist`);
+
+--
 -- Indices de la tabla `select_indiv_examen`
 --
 ALTER TABLE `select_indiv_examen`
   ADD KEY `id_examen` (`id_examen`,`id_postulante`),
   ADD KEY `id_postulante` (`id_postulante`);
+
+--
+-- Indices de la tabla `situacion_servicio`
+--
+ALTER TABLE `situacion_servicio`
+  ADD PRIMARY KEY (`id_situacion`);
 
 --
 -- Indices de la tabla `ubdepartamento`
@@ -2540,6 +2661,24 @@ ALTER TABLE `grupos`
   MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `lug_nacimiento`
+--
+ALTER TABLE `lug_nacimiento`
+  MODIFY `id_lug_nacimiento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `lug_servicio`
+--
+ALTER TABLE `lug_servicio`
+  MODIFY `id_lugar_servicio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `opciones_carrera`
+--
+ALTER TABLE `opciones_carrera`
+  MODIFY `id_opciones_carrera` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `postulante`
 --
 ALTER TABLE `postulante`
@@ -2562,6 +2701,18 @@ ALTER TABLE `profesor`
 --
 ALTER TABLE `resultado`
   MODIFY `id_resultado` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `sede_examen`
+--
+ALTER TABLE `sede_examen`
+  MODIFY `id_sede_examen` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `situacion_servicio`
+--
+ALTER TABLE `situacion_servicio`
+  MODIFY `id_situacion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ubicacion`
@@ -2606,11 +2757,21 @@ ALTER TABLE `integrantes`
   ADD CONSTRAINT `integrantes_ibfk_3` FOREIGN KEY (`id_postulante`) REFERENCES `postulante` (`id_postulante`);
 
 --
+-- Filtros para la tabla `opciones_carrera`
+--
+ALTER TABLE `opciones_carrera`
+  ADD CONSTRAINT `opciones_carrera_ibfk_1` FOREIGN KEY (`id_postulante`) REFERENCES `postulante` (`id_postulante`),
+  ADD CONSTRAINT `opciones_carrera_ibfk_2` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`);
+
+--
 -- Filtros para la tabla `postulante`
 --
 ALTER TABLE `postulante`
-  ADD CONSTRAINT `postulante_ibfk_2` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`),
-  ADD CONSTRAINT `postulante_ibfk_3` FOREIGN KEY (`id_datos`) REFERENCES `datos_personales` (`id_datos`);
+  ADD CONSTRAINT `postulante_ibfk_3` FOREIGN KEY (`id_datos`) REFERENCES `datos_personales` (`id_datos`),
+  ADD CONSTRAINT `postulante_ibfk_4` FOREIGN KEY (`id_lugar_servicio`) REFERENCES `lug_servicio` (`id_lugar_servicio`),
+  ADD CONSTRAINT `postulante_ibfk_5` FOREIGN KEY (`id_sede_examen`) REFERENCES `sede_examen` (`id_sede_examen`),
+  ADD CONSTRAINT `postulante_ibfk_6` FOREIGN KEY (`id_lug_nacimiento`) REFERENCES `lug_nacimiento` (`id_lug_nacimiento`),
+  ADD CONSTRAINT `postulante_ibfk_7` FOREIGN KEY (`id_situacion`) REFERENCES `situacion_servicio` (`id_situacion`);
 
 --
 -- Filtros para la tabla `preguntas`

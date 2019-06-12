@@ -21,9 +21,9 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/bootstrap-slider/nueva_version/bootstrap-slider.js"></script>
+<script src="bower_components/bootstrap/js/tooltip.js"></script>
 <!-- SELECT -->
 <script src="bower_components/select2/dist/js/select2.min.js"></script>
-
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- InputMask -->
@@ -35,6 +35,10 @@
 <!-- datepicker -->
 <script src="bower_components/moment/min/moment.min.js"></script>
 <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="bower_components/datatables.net/js/dataTables.responsive.min.js"></script>
 <!-- datepicker -->
 <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="js/examen.js"></script>
@@ -42,6 +46,12 @@
   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+$('.editar').tooltip('show')
+$('.eliminar').tooltip('show')
 
 
     //Date range picker
@@ -80,7 +90,7 @@
         "Deciembre"
         ],
         "firstDay": 1 
-  } })
+      } })
 
     //Date range as a button
 //     $('#daterange-btn').daterangepicker(
@@ -179,6 +189,37 @@ $("#ex18b").slider({
   value: [30, 60],
   labelledby: ['ex18-label-2a', 'ex18-label-2b']
 });
+
+
+
+var idioma_español = {
+  "sProcessing":     "Procesando...",
+  "sLengthMenu":     "Mostrar _MENU_ registros",
+  "sZeroRecords":    "No se encontraron resultados",
+  "sEmptyTable":     "Ningún dato disponible en esta tabla",
+  "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+  "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+  "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+  "sInfoPostFix":    "",
+  "sSearch":         "Buscar:",
+  "sUrl":            "",
+  "sInfoThousands":  ",",
+  "sLoadingRecords": "Cargando...",
+  "oPaginate": {
+    "sFirst":    "Primero",
+    "sLast":     "Último",
+    "sNext":     "Siguiente",
+    "sPrevious": "Anterior"
+  },
+  "oAria": {
+    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+  }
+}
+
+
+
+
 </script>
 
 

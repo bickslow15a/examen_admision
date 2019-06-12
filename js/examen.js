@@ -1,8 +1,11 @@
 $(document).ready(function() {
 
 
+
+
 	llenar_checkbox_supervisor();
 	llenar_checkbox_postulante();
+  listar_examen();
 
 	$('#formulario_examen').submit(e => {
 		 //previeneque que nos lleve a otra pagina el boton submit
@@ -21,7 +24,7 @@ $(document).ready(function() {
 		 	grupo: $('#grupo').val().length > 0  ? $('#grupo').val() : 'vacio',
 		 	instr: $('#instr').val()
       // id: $('#taskId').val()
-  };
+    };
   // const url = edit === false ? 'task-add.php' : 'task-edit.php';
   const url = 'php/modelo/agregar_examen.php'; 
   console.log(datos, url);
@@ -54,11 +57,11 @@ $(document).ready(function() {
 });
 	}
 
-		function llenar_checkbox_postulante() {
-		$.ajax({
-			url: 'php/modelo/llenar_checkbox_postulante.php',
-			type: 'GET',
-			success: function(response) {
+  function llenar_checkbox_postulante() {
+    $.ajax({
+     url: 'php/modelo/llenar_checkbox_postulante.php',
+     type: 'GET',
+     success: function(response) {
       	// comprobar el contenido del checkbox
   	// console.log(response);
 
@@ -73,7 +76,36 @@ $(document).ready(function() {
   	$('#postulante').html(template);
   }
 });
-	}
+  }
+
+  // listar formulario_examen
+
+
+function listar_examen() {
+  $('#listar_examen').DataTable({
+     "destroy":true,
+      "ajax":{
+        "method":"POST",
+        "url": "php/modelo/listar_examen.php"
+      },
+      "columns":[
+        {"data":"nombreCompleto"},
+        {"data":"nom_examen"},
+        {"data":"fecha_inicio"},
+        {"data":"fecha_fin"},
+        {"data":"duracion"},
+        {"data":"porcentaje"},
+        {"data":"maxima_nota"},
+        {"data":"minima_nota"},
+        {"data":"num_preguntas"},
+        {"data":"publicar_nota"},
+        {"data":"instr_examen"},
+        {"defaultContent":'<button type="button" class="editar btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Editar Examen"><i class="fa fa-pencil-square-o"></i></button>  <button type="button" data-toggle="tooltip" data-placement="bottom" title="Eliminar Examen" class="eliminar btn btn-danger" data-toggle="modal" data-target="#modalEliminar" ><i class="fa fa-trash-o"></i></button>'}
+      ],
+    'language'    : idioma_español
+  })
+}
+
 
 // 		function llenar_checkbox_grupos() {
 // 		$.ajax({

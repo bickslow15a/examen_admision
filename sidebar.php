@@ -42,7 +42,7 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="agregarexamen.php"><i class="fa fa-circle-o"></i>Agregar Examen</a></li>
-          <li><a href="listar_examen.php"><i class="fa fa-circle-o"></i>Lista de Exámenes</a></li>
+          <li><a href="listarexamen.php"><i class="fa fa-circle-o"></i>Lista de Exámenes</a></li>
           <li><a href="../index2.html"><i class="fa fa-circle-o"></i>Lista de Resultados</a></li>
           <li><a href="../index2.html"><i class="fa fa-circle-o"></i>Exámenes Eliminados</a></li>
         </ul>

@@ -71,7 +71,7 @@
               <!-- /.form-group -->
               <div class="form-group">
                 <label for="nom_examen">Nombre de Examen:</label>
-                <input type="text" class="form-control"  name="nom_examen" id="nom_examen" placeholder="Ingrese un nombre">
+                <input type="text" class="form-control"  name="nom_examen" id="nom_examen" placeholder="Ingrese un nombre" >
               </div>
               <!-- /.form-group -->
               <div class="form-group">
@@ -96,7 +96,7 @@
                 <label>Publicar Notas:</label>
                 <br>
                 <label style="margin-right: 10px; margin-left: 10px;">
-                  <input type="radio" name="r1" class="minimal pub_si" checked  value="si"> Si
+                  <input type="radio" name="r1" class="minimal pub_si" checked  value="si" > Si
                 </label>
                 <label style="margin-right: 10px; margin-left: 10px;">
                   <input type="radio" name="r1" class="minimal-red pub_no" value="no"> No
