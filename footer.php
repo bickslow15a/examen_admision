@@ -47,6 +47,11 @@
     //Initialize Select2 Elements
     $('.select2').select2()
 
+    $('#usuario').select2({
+      placeholder:"Seleccione un supervisor...",
+      allowClear: true
+    })
+
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
@@ -171,23 +176,17 @@ $('.eliminar').tooltip('show')
 
   })
 // slider rango para elegir un numero
-$('#ex1').slider({
-  formatter: function(value) {
-    return 'Valor: ' + value;
-  }
-});
-// slider rango para elegir un numero
-$('#ex2').slider({
+$('.slider-normal').slider({
   formatter: function(value) {
     return 'Valor: ' + value;
   }
 });
 // minima nota aprobatoria
-$("#ex18b").slider({
+$(".slider-doble").slider({
   min: 0,
   max: 100,
   value: [30, 60],
-  labelledby: ['ex18-label-2a', 'ex18-label-2b']
+  labelledby: ['min', 'max']
 });
 
 
