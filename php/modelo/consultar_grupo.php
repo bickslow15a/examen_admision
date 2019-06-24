@@ -13,7 +13,7 @@ if(!$result) {
 $json = array();
 while($row = mysqli_fetch_array($result)) {
   $json[] = array(
-    'id_grupo' => $row['id_grupo'],
+     $row['id_grupo']
       );
 }
 

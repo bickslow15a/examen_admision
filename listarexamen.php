@@ -20,14 +20,14 @@
           <div class="row">
             <!-- formulario -->
             <!-- action="php/modelo/agregar_examen.php" method="post" -->
-            <form id="formulario_examen">
+            <form id="editar_examen">
               <div class="col-md-6">
                 <!-- id_examen oculto para editar -->
                 <input type="hidden" id="id_examen" name="id_examen" value="0">
                 <div class="form-group">
                   <label>Supervisor:</label>
                   <select class="form-control select2" name="usuario" id="usuario" style="width: 100%;" autofocus>
-                    <option></option>
+
                     <!-- <option selected="selected">Roberto</option> -->
                   </select>
                 </div>

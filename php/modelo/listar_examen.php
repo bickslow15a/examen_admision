@@ -11,8 +11,10 @@ if(!$result) {
 
 
 while($data = mysqli_fetch_assoc($result)) {
-  $arreglo["data"][] = array_map("utf8_encode", $data);
+  $arreglo["data"][] = $data;
+
 }
+
 
 echo json_encode($arreglo);
 

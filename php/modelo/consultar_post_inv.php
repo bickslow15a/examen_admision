@@ -3,7 +3,7 @@
 include('../conexion/conn.php');
 
 
-$id_examen= $_POST['id_examen'];
+$id_examen = $_POST['pos_in'];
 $query = "SELECT id_postulante from select_indiv_examen WHERE '$id_examen' = id_examen";
 $result = mysqli_query($connection, $query);
 if(!$result) {
@@ -13,7 +13,7 @@ if(!$result) {
 $json = array();
 while($row = mysqli_fetch_array($result)) {
   $json[] = array(
-    'id_postulante' => $row['id_postulante'],
+   $row['id_postulante']
       );
 }
 

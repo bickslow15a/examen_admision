@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-06-2019 a las 14:24:41
+-- Tiempo de generación: 24-06-2019 a las 11:53:06
 -- Versión del servidor: 10.1.40-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -103,8 +103,15 @@ INSERT INTO `examen` (`id_examen`, `id_profesor`, `nom_examen`, `fecha_inicio`, 
 (12, 1, 'cgdf', '1970-01-01 00:00:00', '2019-04-07 00:00:00', '01:30:00', '65', 60, 30, 100, 'si', 'fgdag', 1),
 (17, 1, 'luis', '1970-01-01 00:00:00', '2019-09-07 00:00:00', '01:15:00', '65', 60, 30, 100, 'no', 'hgk', 1),
 (27, 1, 'testeo 10', '2019-06-15 02:10:00', '2019-07-09 22:50:00', '01:00:00', '65', 60, 30, 100, 'si', 'agregar datos', 1),
-(37, 1, '', '2019-06-05 00:00:00', '2019-06-05 23:59:59', '00:30:00', '65', 60, 30, 100, 'si', '', 1),
-(38, 1, '', '2019-06-05 00:00:00', '2019-06-05 23:59:59', '00:30:00', '65', 60, 30, 100, 'si', '', 1);
+(44, 1, 'DFGDFG', '2019-06-13 00:00:00', '2019-06-13 23:59:59', '00:30:00', '65', 60, 30, 100, 'si', 'GDFSGFS', 1),
+(45, 1, 'DSFCVBXC', '2019-06-13 00:00:00', '2019-06-13 23:59:59', '00:30:00', '65', 60, 30, 100, 'si', 'CBVCB', 1),
+(46, 1, 'XVFXCZ', '2019-06-13 00:00:00', '2019-06-13 23:59:59', '00:30:00', '65', 60, 30, 100, 'si', 'GJHNFDNBFDG', 1),
+(47, 1, 'BMNGCBMN', '2019-06-13 00:00:00', '2019-06-13 23:59:59', '00:30:00', '65', 60, 30, 100, 'si', 'BVNCBNM', 1),
+(48, 1, 'PRUEBA FINAL PARA REGISTRAR', '2019-06-13 00:00:00', '2019-06-13 23:59:59', '01:00:00', '65', 60, 30, 100, 'si', 'UKHIUJKHHF', 1),
+(49, 2, 'gnfvchfg', '2019-06-28 00:00:00', '2019-07-27 23:00:00', '02:30:00', '65', 60, 30, 100, 'si', 'fgfdhgf', 1),
+(51, 2, 'Jose+1', '2019-06-20 00:00:00', '2019-07-11 23:00:00', '01:30:00', '100', 100, 0, 30, 'no', 'lolo', 1),
+(52, 1, 'Jose+3', '2019-06-22 20:19:00', '1970-01-01 01:00:00', '02:00:00', '30', 100, 0, 100, 'no', 'jota', 1),
+(53, 2, 'examen10', '2019-06-19 00:00:00', '2019-07-12 23:00:00', '03:00:00', '93', 85, 13, 59, 'no', 'lolo', 1);
 
 -- --------------------------------------------------------
 
@@ -117,6 +124,20 @@ CREATE TABLE `examen_grupo` (
   `id_examen` int(11) NOT NULL,
   `id_grupo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `examen_grupo`
+--
+
+INSERT INTO `examen_grupo` (`id_examen_grupo`, `id_examen`, `id_grupo`) VALUES
+(5, 48, 1),
+(6, 48, 2),
+(7, 49, 1),
+(8, 49, 2),
+(9, 51, 1),
+(10, 51, 2),
+(14, 52, 1),
+(15, 53, 2);
 
 -- --------------------------------------------------------
 
@@ -131,9 +152,17 @@ CREATE TABLE `grupos` (
   `auto_guardado` varchar(2) DEFAULT NULL,
   `fecha_inicio` datetime DEFAULT NULL,
   `fecha_fin` datetime DEFAULT NULL,
-  `id_ubi_examen` int(11) DEFAULT NULL,
+  `id_sede_examen` int(11) DEFAULT NULL,
   `estado` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `grupos`
+--
+
+INSERT INTO `grupos` (`id_grupo`, `nombre`, `descripcion`, `auto_guardado`, `fecha_inicio`, `fecha_fin`, `id_sede_examen`, `estado`) VALUES
+(1, 'febrero 15', 'examen 2019 primer cuarto del año', 'si', '2019-06-01 00:00:00', '2019-06-30 00:00:00', 1, 1),
+(2, 'junio 10', 'examen de admision en junio 2019, segundo cuarto del año', 'no', NULL, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -295,6 +324,13 @@ CREATE TABLE `sede_examen` (
   `lugar_examen` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `sede_examen`
+--
+
+INSERT INTO `sede_examen` (`id_sede_examen`, `idDepa`, `idProv`, `idDist`, `lugar_examen`) VALUES
+(1, 1, 2, 77, 'Av. siempreviva #966');
+
 -- --------------------------------------------------------
 
 --
@@ -305,6 +341,22 @@ CREATE TABLE `select_indiv_examen` (
   `id_examen` int(11) NOT NULL,
   `id_postulante` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `select_indiv_examen`
+--
+
+INSERT INTO `select_indiv_examen` (`id_examen`, `id_postulante`) VALUES
+(46, 1),
+(46, 2),
+(48, 1),
+(48, 2),
+(49, 1),
+(49, 2),
+(51, 1),
+(51, 2),
+(52, 2),
+(53, 1);
 
 -- --------------------------------------------------------
 
@@ -2501,7 +2553,8 @@ ALTER TABLE `examen_grupo`
 -- Indices de la tabla `grupos`
 --
 ALTER TABLE `grupos`
-  ADD PRIMARY KEY (`id_grupo`);
+  ADD PRIMARY KEY (`id_grupo`),
+  ADD KEY `id_sede_examen` (`id_sede_examen`);
 
 --
 -- Indices de la tabla `integrantes`
@@ -2646,19 +2699,19 @@ ALTER TABLE `datos_personales`
 -- AUTO_INCREMENT de la tabla `examen`
 --
 ALTER TABLE `examen`
-  MODIFY `id_examen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_examen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `examen_grupo`
 --
 ALTER TABLE `examen_grupo`
-  MODIFY `id_examen_grupo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_examen_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos`
 --
 ALTER TABLE `grupos`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `lug_nacimiento`
@@ -2706,7 +2759,7 @@ ALTER TABLE `resultado`
 -- AUTO_INCREMENT de la tabla `sede_examen`
 --
 ALTER TABLE `sede_examen`
-  MODIFY `id_sede_examen` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sede_examen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `situacion_servicio`
@@ -2750,6 +2803,12 @@ ALTER TABLE `examen_grupo`
   ADD CONSTRAINT `examen_grupo_ibfk_2` FOREIGN KEY (`id_grupo`) REFERENCES `grupos` (`id_grupo`);
 
 --
+-- Filtros para la tabla `grupos`
+--
+ALTER TABLE `grupos`
+  ADD CONSTRAINT `grupos_ibfk_1` FOREIGN KEY (`id_sede_examen`) REFERENCES `sede_examen` (`id_sede_examen`);
+
+--
 -- Filtros para la tabla `integrantes`
 --
 ALTER TABLE `integrantes`
@@ -2769,9 +2828,9 @@ ALTER TABLE `opciones_carrera`
 ALTER TABLE `postulante`
   ADD CONSTRAINT `postulante_ibfk_3` FOREIGN KEY (`id_datos`) REFERENCES `datos_personales` (`id_datos`),
   ADD CONSTRAINT `postulante_ibfk_4` FOREIGN KEY (`id_lugar_servicio`) REFERENCES `lug_servicio` (`id_lugar_servicio`),
-  ADD CONSTRAINT `postulante_ibfk_5` FOREIGN KEY (`id_sede_examen`) REFERENCES `sede_examen` (`id_sede_examen`),
   ADD CONSTRAINT `postulante_ibfk_6` FOREIGN KEY (`id_lug_nacimiento`) REFERENCES `lug_nacimiento` (`id_lug_nacimiento`),
-  ADD CONSTRAINT `postulante_ibfk_7` FOREIGN KEY (`id_situacion`) REFERENCES `situacion_servicio` (`id_situacion`);
+  ADD CONSTRAINT `postulante_ibfk_7` FOREIGN KEY (`id_situacion`) REFERENCES `situacion_servicio` (`id_situacion`),
+  ADD CONSTRAINT `postulante_ibfk_8` FOREIGN KEY (`id_sede_examen`) REFERENCES `sede_examen` (`id_sede_examen`);
 
 --
 -- Filtros para la tabla `preguntas`

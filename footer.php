@@ -41,7 +41,7 @@
 <script src="bower_components/datatables.net/js/dataTables.responsive.min.js"></script>
 <!-- datepicker -->
 <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="js/examen.js"></script>
+
 <script>
   $(function () {
     //Initialize Select2 Elements
@@ -218,9 +218,9 @@ var idioma_español = {
 
 
 
-
 </script>
 
+<script src="js/examen.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
